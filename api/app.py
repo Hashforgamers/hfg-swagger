@@ -1,58 +1,27 @@
-from flask import Flask
-from flasgger import Swagger
+from flask import Flask, send_from_directory
+from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
-swagger = Swagger(app)
 
-@app.route('/api/vendor/<int:vendor_id>/documents', methods=['GET'])
-def get_vendor_documents(vendor_id):
-    """
-    This endpoint retrieves the documents for a vendor
-    ---
-    parameters:
-      - name: vendor_id
-        in: path
-        type: integer
-        required: true
-        description: The ID of the vendor
-    responses:
-      200:
-        description: List of documents
-        schema:
-          type: array
-          items:
-            type: string
-    """
-    # Sample response (you can replace with actual logic)
-    return {"documents": ["doc1", "doc2"]}
+# Define the path to your swagger.json file
+SWAGGER_JSON = 'swagger/swagger.json'
 
-@app.route('/api/vendor/<int:vendor_id>/dashboard', methods=['GET'])
-def get_vendor_dashboard(vendor_id):
-    """
-    This endpoint retrieves the dashboard for a vendor
-    ---
-    parameters:
-      - name: vendor_id
-        in: path
-        type: integer
-        required: true
-        description: The ID of the vendor
-    responses:
-      200:
-        description: Vendor dashboard data
-        schema:
-          type: object
-          properties:
-            total_revenue:
-              type: integer
-            active_sessions:
-              type: integer
-    """
-    # Sample response (you can replace with actual logic)
-    return {
-        "total_revenue": 10000,
-        "active_sessions": 50
+# Set up Swagger UI Blueprint
+swaggerui_blueprint = get_swaggerui_blueprint(
+    '/swagger',  # The URL path to access Swagger UI
+    SWAGGER_JSON,  # Path to the swagger.json file
+    config={
+        'app_name': "My Flask API"
     }
+)
 
-if __name__ == "__main__":
+# Register the Swagger UI blueprint
+app.register_blueprint(swaggerui_blueprint, url_prefix='/swagger')
+
+# Serve the raw swagger.json (optional)
+@app.route('/swagger.json')
+def swagger_json():
+    return send_from_directory('swagger', 'swagger.json')
+
+if __name__ == '__main__':
     app.run(debug=True)
