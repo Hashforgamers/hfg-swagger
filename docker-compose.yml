@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   swagger-ui:
     image: swaggerapi/swagger-ui
@@ -9,3 +10,20 @@ services:
       - SWAGGER_JSON=/swagger/swagger.json
     volumes:
       - ./swagger:/swagger
+    depends_on:
+      - flask-api  # Ensure Swagger UI waits for the Flask API service
+
+  flask-api:
+    build:
+      context: ./api  # Build the Flask API from the Dockerfile in ./api
+    container_name: flask-api
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
