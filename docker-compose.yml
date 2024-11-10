@@ -1,44 +1,11 @@
-version: '3.7'
-
+version: '3'
 services:
-  # Vendor Onboarding Service
-  vendor-onboard:
-    build:
-      context: ./path-to-your-vendor-onboard-service
-    ports:
-      - "5051:5051"
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
-    networks:
-      - hfg-network
-
-  # Database Migration Service
-  db-migration:
-    build:
-      context: ./path-to-your-db-migration-service
-    ports:
-      - "5052:5052"
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
-    networks:
-      - hfg-network
-
-  # Swagger UI Service
   swagger-ui:
-    image: swaggerapi/swagger-ui:latest
+    image: swaggerapi/swagger-ui
     container_name: swagger-ui
     ports:
-      - "8080:8080"
+      - 8080:8080
     environment:
-      - SWAGGER_JSON=/usr/share/nginx/html/swagger.json
-    networks:
-      - hfg-network
-    depends_on:
-      - vendor-onboard
-      - db-migration
-
-networks:
-  hfg-network:
-    driver: bridge
+      - SWAGGER_JSON=/swagger/swagger.json
+    volumes:
+      - ./swagger:/swagger
