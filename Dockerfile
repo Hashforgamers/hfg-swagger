@@ -2,4 +2,4 @@
 FROM swaggerapi/swagger-ui
 
 # Set the default URL in Swagger UI to our OpenAPI file
-ENV SWAGGER_JSON=/usr/share/nginx/html/swagger.json
+ENV SWAGGER_JSON=swagger.json
