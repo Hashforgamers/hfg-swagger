@@ -21,7 +21,7 @@ app.register_blueprint(swaggerui_blueprint, url_prefix='/swagger')
 # Serve the swagger.json file (if needed)
 @app.route('/swagger.json')
 def swagger_json():
-    return send_from_directory('/app/swagger', 'swagger.json')
+    return send_from_directory('/swagger', 'swagger.json')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)  # Ensure Flask listens on all interfaces
