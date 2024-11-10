@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Install the necessary dependencies
-RUN pip install -r requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # Expose the port where the app will run
 EXPOSE 5000
