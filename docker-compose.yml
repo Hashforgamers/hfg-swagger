@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   api:
-    build: ./api  # Path to your Flask app
+    build: ./api
     ports:
-      - "5000:5000"  # Expose Flask app on port 5000
+      - "5000:5000"  # Expose port 5000 for Flask app
     volumes:
-      - ./swagger:/app/swagger  # Mount the swagger directory for swagger.json
+      - ./swagger:/app/swagger  # Mount the swagger folder with swagger.json
     environment:
-      - SWAGGER_JSON_URL=/swagger/swagger.json  # Optional: Can be removed since it's handled locally
+      - SWAGGER_JSON_URL=/swagger/swagger.json  # Use the local swagger.json inside the container
     networks:
       - api_network
 
