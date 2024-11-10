@@ -1,4 +1,5 @@
-from flask import Flask, send_from_directory, safe_join
+from flask import Flask, send_from_directory
+from werkzeug.utils import safe_join
 from flask_swagger_ui import get_swaggerui_blueprint
 import os
 
