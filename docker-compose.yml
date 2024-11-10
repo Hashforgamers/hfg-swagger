@@ -6,6 +6,12 @@ services:
     ports:
       - "5000:5000"  # Expose port 5000 for Flask app
     volumes:
-      - ./swagger:/app/swagger  # Mount the swagger folder so it can be accessed in the container
+      - ./swagger:/app/swagger  # Mount the swagger folder to make it available in the container
     environment:
       - SWAGGER_JSON_URL=https://hfg-swagger.onrender.com/swagger.json  # Set external Swagger JSON URL
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    driver: bridge
