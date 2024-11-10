@@ -10,8 +10,6 @@ services:
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=development
-    volumes:
-      - ./swagger.json:/usr/share/nginx/html/swagger.json
     networks:
       - hfg-network
 
