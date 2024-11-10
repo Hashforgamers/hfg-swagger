@@ -24,4 +24,4 @@ def swagger_json():
     return send_from_directory('swagger', 'swagger.json')  # Optional: serve it locally
 
 if __name__ == '__main__':
-    app.run(debug=True)
+     app.run(host='0.0.0.0', port=5000, debug=True)  # Specify port=5050
