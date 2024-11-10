@@ -1,5 +1,6 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, safe_join
 from flask_swagger_ui import get_swaggerui_blueprint
+import os
 
 app = Flask(__name__)
 
@@ -21,7 +22,8 @@ app.register_blueprint(swaggerui_blueprint, url_prefix='/swagger')
 # Serve the raw swagger.json (optional, in case you need to serve it locally too)
 @app.route('/swagger.json')
 def swagger_json():
-    return send_from_directory('swagger', 'swagger.json')  # Optional: serve it locally
+    directory = safe_join(app.root_path, 'swagger')
+    return send_from_directory(directory, 'swagger.json')
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port=5000, debug=True)  # Specify port=5050
