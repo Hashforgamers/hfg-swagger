@@ -1,29 +1,9 @@
-version: '3'
+version: '3.8'
 
 services:
-  swagger-ui:
-    image: swaggerapi/swagger-ui
-    container_name: swagger-ui
+  api:
+    build: ./api
     ports:
-      - 8080:8080
-    environment:
-      - SWAGGER_JSON=/swagger/swagger.json
+      - "5000:5000"  # Expose port 5000 for Flask app
     volumes:
-      - ./swagger:/swagger
-    depends_on:
-      - flask-api  # Ensure Swagger UI waits for the Flask API service
-
-  flask-api:
-    build:
-      context: ./api  # Build the Flask API from the Dockerfile in ./api
-    container_name: flask-api
-    ports:
-      - 5000:5000
-    environment:
-      - FLASK_ENV=production
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - ./swagger:/app/swagger  # Mount the swagger folder so it can be accessed in the container
