@@ -9,9 +9,3 @@ services:
       - ./swagger:/app/swagger  # Mount the swagger folder with swagger.json
     environment:
       - SWAGGER_JSON_URL=/swagger/swagger.json  # Use the local swagger.json inside the container
-    networks:
-      - api_network
-
-networks:
-  api_network:
-    driver: bridge
