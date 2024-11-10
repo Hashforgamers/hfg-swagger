@@ -1,19 +1,16 @@
 # Start from the official Python image
 FROM python:3.9-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the application files into the container
+# Copy the application files
 COPY ./api /app
 
-# Install necessary dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Install Flask-Swagger-UI to serve the Swagger UI
-RUN pip install flask-swagger-ui
-
-# Expose Flask's default port (5000)
+# Expose the Flask app port
 EXPOSE 5000
 
 # Run the Flask app
