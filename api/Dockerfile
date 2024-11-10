@@ -1,20 +1,17 @@
-# Use Python 3.9 as base image
+# Start from the official Python image
 FROM python:3.9-slim
 
-# Set the working directory to /app
+# Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents (including requirements.txt) into the container at /app
-COPY . /app
+# Copy the application files
+COPY ./api /app
 
-# Install the necessary dependencies from requirements.txt
-RUN pip install -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Expose the port where the app will run
+# Expose the Flask app port
 EXPOSE 5000
-
-# Set the environment variable for Flask to run in production mode
-ENV FLASK_ENV=production
 
 # Run the Flask app
 CMD ["python", "app.py"]
