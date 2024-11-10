@@ -4,7 +4,7 @@ FROM python:3.9-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy application files into the container
+# Copy the application files into the container
 COPY ./api /app
 
 # Install necessary dependencies
