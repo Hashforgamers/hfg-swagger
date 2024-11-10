@@ -4,7 +4,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 app = Flask(__name__)
 
 # Path to swagger.json (this assumes it's located in the /app/swagger folder)
-SWAGGER_JSON = '/swagger/swagger.json'
+SWAGGER_JSON = 'https://hfg-swagger.onrender.com/swagger.json'
 
 # Set up Swagger UI Blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(
