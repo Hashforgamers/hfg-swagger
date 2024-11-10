@@ -10,7 +10,7 @@ SWAGGER_JSON = 'https://hfg-swagger.onrender.com/swagger.json'
 # Set up Swagger UI Blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(
     '/swagger',  # The URL path to access Swagger UI
-    SWAGGER_JSON_URL,  # External URL for the swagger.json file
+    #SWAGGER_JSON_URL,  # External URL for the swagger.json file
     SWAGGER_JSON,
     config={
         'app_name': "My Flask API"
