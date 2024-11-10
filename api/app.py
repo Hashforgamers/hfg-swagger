@@ -3,13 +3,13 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
 
-# External URL for the swagger.json file
-API_URL = 'https://hfg-swagger.onrender.com/swagger.json'
+# The path to the locally mounted swagger.json file
+SWAGGER_JSON = '/app/swagger/swagger.json'
 
 # Set up Swagger UI Blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(
     '/swagger',  # The URL path to access Swagger UI
-    API_URL,  # External URL for the swagger.json file
+    SWAGGER_JSON,  # Path to swagger.json file inside the container
     config={
         'app_name': "My Flask API"
     }
@@ -18,10 +18,10 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 # Register the Swagger UI blueprint
 app.register_blueprint(swaggerui_blueprint, url_prefix='/swagger')
 
-# Serve the raw swagger.json (optional, in case you need to serve it locally too)
+# Serve the raw swagger.json if needed (optional)
 @app.route('/swagger.json')
 def swagger_json():
-    return send_from_directory('swagger', 'swagger.json')  # Optional: serve it locally
+    return send_from_directory('/app/swagger', 'swagger.json')
 
 if __name__ == '__main__':
     app.run(debug=True)
